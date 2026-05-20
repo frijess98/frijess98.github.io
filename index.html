@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jessica Frigerio — Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <title>Jessica Frigerio — Junior Developer</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;800&family=DM+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -19,15 +18,18 @@
       }
 
       :root {
-        --bg: #08080f;
-        --surface: rgba(255, 255, 255, 0.03);
-        --border: rgba(255, 255, 255, 0.07);
-        --violet: #7c3aed;
-        --violet-light: #a78bfa;
-        --violet-pale: #c4b5fd;
-        --text: #f1f5f9;
-        --muted: #94a3b8;
-        --dim: #475569;
+        --bg: #f8f7ff;
+        --bg2: #f0eeff;
+        --white: #ffffff;
+        --violet: #6d3fc8;
+        --violet-mid: #8b5cf6;
+        --violet-light: #ede9fe;
+        --violet-pale: #f5f3ff;
+        --border: #e4e0f7;
+        --text: #1e1b2e;
+        --muted: #6b6880;
+        --dim: #9b96b0;
+        --mono: "JetBrains Mono", monospace;
       }
 
       html {
@@ -37,351 +39,480 @@
       body {
         background: var(--bg);
         color: var(--text);
-        font-family: "DM Sans", sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
       }
 
-      /* ── CANVAS BG ── */
-      #bg-canvas {
+      /* ── NAV ── */
+      nav {
         position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.6;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(248, 247, 255, 0.85);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
       }
-
-      .glow-1,
-      .glow-2 {
-        position: fixed;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
+      .nav-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
-      .glow-1 {
-        width: 700px;
-        height: 700px;
-        top: -20%;
-        left: -15%;
-        background: radial-gradient(
-          circle,
-          rgba(109, 40, 217, 0.16) 0%,
-          transparent 70%
-        );
+      .nav-logo {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--violet);
+        text-decoration: none;
       }
-      .glow-2 {
-        width: 600px;
-        height: 600px;
-        bottom: -20%;
-        right: -10%;
-        background: radial-gradient(
-          circle,
-          rgba(168, 85, 247, 0.1) 0%,
-          transparent 70%
-        );
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--violet);
       }
 
       /* ── LAYOUT ── */
-      .wrapper {
-        position: relative;
-        z-index: 1;
-        max-width: 900px;
+      .container {
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 5rem 2rem 3rem;
+        padding: 0 2rem;
       }
 
-      /* ── SECTION LABEL ── */
-      .label {
+      section {
+        padding: 5rem 0;
+      }
+
+      /* ── SECTION HEADER ── */
+      .section-header {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 1.5rem;
+        gap: 14px;
+        margin-bottom: 3rem;
       }
-      .label-line {
-        width: 28px;
-        height: 2px;
-        background: linear-gradient(90deg, var(--violet), transparent);
-        border-radius: 2px;
-        flex-shrink: 0;
-      }
-      .label span {
-        font-size: 11px;
-        letter-spacing: 0.2em;
+      .section-header h2 {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--violet);
-        font-weight: 700;
-        font-family: "DM Mono", monospace;
+        font-family: var(--mono);
       }
-
-      /* ── CARD ── */
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        backdrop-filter: blur(12px);
-        padding: 2.5rem;
-        transition: border-color 0.3s;
+      .section-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
       }
 
       /* ── HERO ── */
-      .hero {
-        margin-bottom: 6rem;
+      #hero {
+        padding-top: 9rem;
+        padding-bottom: 5rem;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
       }
-
-      .hero-badge {
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 3rem;
+        align-items: center;
+      }
+      .hero-tag {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 6px 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(139, 92, 246, 0.35);
-        background: rgba(139, 92, 246, 0.08);
-        color: var(--violet-light);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        font-family: "DM Mono", monospace;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--violet);
+        background: var(--violet-light);
+        border: 1px solid #d8d0f7;
+        border-radius: 6px;
+        padding: 4px 12px;
         margin-bottom: 1.5rem;
       }
-      .hero-badge-dot {
+      .hero-tag-dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: var(--violet-light);
-        box-shadow: 0 0 6px var(--violet-light);
-        animation: pulse 2s ease-in-out infinite;
+        background: var(--violet);
+        animation: blink 2s ease-in-out infinite;
       }
-      @keyframes pulse {
+      @keyframes blink {
         0%,
         100% {
           opacity: 1;
         }
         50% {
-          opacity: 0.4;
+          opacity: 0.3;
         }
       }
 
       .hero h1 {
-        font-size: clamp(3.5rem, 10vw, 7rem);
-        font-weight: 800;
-        line-height: 1;
-        letter-spacing: -0.03em;
-        margin-bottom: 1.5rem;
+        font-size: clamp(2.6rem, 6vw, 4.2rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        margin-bottom: 1.2rem;
       }
-      .hero h1 .name-white {
-        color: #fff;
-        display: block;
+      .hero h1 span {
+        color: var(--violet-mid);
       }
-      .hero h1 .name-grad {
-        display: block;
-        background: linear-gradient(
-          135deg,
-          #c4b5fd 0%,
-          #7c3aed 55%,
-          #4f23c8 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
       .hero-sub {
-        font-size: 1.2rem;
-        font-weight: 300;
+        font-size: 1.05rem;
         color: var(--muted);
-        max-width: 460px;
-        line-height: 1.6;
-        margin-bottom: 2.5rem;
+        max-width: 480px;
+        line-height: 1.75;
+        margin-bottom: 2rem;
       }
-
       .hero-btns {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
       }
-
       .btn-primary {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        padding: 13px 28px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 8px;
+        background: var(--violet);
         color: #fff;
+        font-size: 14px;
         font-weight: 600;
-        font-size: 15px;
         text-decoration: none;
-        box-shadow: 0 0 28px rgba(109, 40, 217, 0.4);
         transition:
-          transform 0.2s,
-          box-shadow 0.2s;
-        font-family: "DM Sans", sans-serif;
+          background 0.2s,
+          transform 0.15s;
       }
       .btn-primary:hover {
-        transform: scale(1.04);
-        box-shadow: 0 0 42px rgba(124, 58, 237, 0.6);
+        background: #5a32a8;
+        transform: translateY(-1px);
       }
-
-      .btn-outline {
+      .btn-ghost {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        padding: 13px 28px;
-        border-radius: 14px;
-        border: 1px solid rgba(139, 92, 246, 0.3);
-        background: rgba(139, 92, 246, 0.06);
-        color: var(--violet-pale);
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 8px;
+        border: 1.5px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-size: 14px;
         font-weight: 500;
-        font-size: 15px;
         text-decoration: none;
-        transition: background 0.2s;
-        font-family: "DM Sans", sans-serif;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
       }
-      .btn-outline:hover {
-        background: rgba(139, 92, 246, 0.14);
+      .btn-ghost:hover {
+        border-color: var(--violet-mid);
+        color: var(--violet);
+      }
+
+      .hero-badge-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end;
+      }
+      .stat-box {
+        background: var(--violet-pale);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        min-width: 130px;
+      }
+      .stat-num {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--violet);
+        line-height: 1;
+        font-family: var(--mono);
+      }
+      .stat-label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 4px;
       }
 
       /* ── ABOUT ── */
-      .about {
-        margin-bottom: 5rem;
+      #about {
+        background: var(--bg);
       }
-      .about p {
-        color: #cbd5e1;
-        line-height: 1.9;
-        font-size: 1.05rem;
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
       }
-      .about p em {
-        color: var(--violet-pale);
+      .about-text p {
+        color: var(--muted);
+        line-height: 1.85;
+        font-size: 15.5px;
+        margin-bottom: 1rem;
+      }
+      .about-text p:last-child {
+        margin-bottom: 0;
+      }
+      .about-text em {
+        color: var(--violet);
         font-style: normal;
+        font-weight: 600;
+      }
+      .info-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .info-list li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 14px;
+      }
+      .info-key {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--violet);
+        background: var(--violet-light);
+        padding: 2px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        margin-top: 1px;
         font-weight: 500;
+      }
+      .info-val {
+        color: var(--muted);
       }
 
       /* ── SKILLS ── */
-      .skills {
-        margin-bottom: 5rem;
+      #skills {
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
       }
       .skills-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 12px;
       }
       .skill-card {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        padding: 1.2rem 0.8rem;
-        border-radius: 18px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        cursor: default;
+        padding: 1.3rem 1rem;
+        border-radius: 12px;
+        background: var(--bg);
+        border: 1.5px solid var(--border);
         transition:
-          background 0.25s,
-          border-color 0.25s,
-          transform 0.25s;
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.2s;
+        cursor: default;
       }
       .skill-card:hover {
-        background: rgba(139, 92, 246, 0.1);
-        border-color: rgba(139, 92, 246, 0.35);
-        transform: translateY(-5px);
+        border-color: var(--violet-mid);
+        background: var(--violet-pale);
+        transform: translateY(-3px);
       }
       .skill-card img {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         object-fit: contain;
       }
       .skill-card span {
-        font-size: 11.5px;
-        color: var(--muted);
+        font-size: 12px;
         font-weight: 500;
+        color: var(--muted);
         text-align: center;
+        font-family: var(--mono);
       }
 
       /* ── PROJECT ── */
-      .project {
-        margin-bottom: 5rem;
+      #projekt {
+        background: var(--bg);
       }
       .project-card {
-        position: relative;
+        background: var(--white);
+        border: 1.5px solid var(--border);
+        border-radius: 16px;
         overflow: hidden;
-        border-radius: 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .project-body {
         padding: 2.5rem;
-        background: linear-gradient(
-          135deg,
-          rgba(109, 40, 217, 0.12) 0%,
-          rgba(139, 92, 246, 0.05) 100%
-        );
-        border: 1px solid rgba(139, 92, 246, 0.22);
       }
-      .project-card::before {
-        content: "";
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(139, 92, 246, 0.14) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .project-tag {
+      .project-eyebrow {
+        font-family: var(--mono);
         font-size: 11px;
-        letter-spacing: 0.18em;
+        font-weight: 500;
+        color: var(--violet);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--violet-light);
-        font-weight: 700;
-        font-family: "DM Mono", monospace;
-        margin-bottom: 1rem;
-        display: block;
+        margin-bottom: 0.8rem;
       }
-      .project-card h3 {
-        font-size: 1.9rem;
+      .project-body h3 {
+        font-size: 1.6rem;
         font-weight: 700;
-        color: #f1f5f9;
-        line-height: 1.2;
+        color: var(--text);
+        line-height: 1.25;
         margin-bottom: 1rem;
       }
-      .project-card p {
+      .project-body p {
         color: var(--muted);
-        line-height: 1.8;
-        font-size: 1rem;
-        max-width: 540px;
+        font-size: 15px;
+        line-height: 1.75;
         margin-bottom: 1.5rem;
+      }
+      .project-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 1.5rem;
+      }
+      .project-features li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .project-features li::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--violet-mid);
+        flex-shrink: 0;
       }
       .tech-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
       }
       .tech-tag {
-        padding: 5px 14px;
-        border-radius: 999px;
-        font-size: 13px;
+        font-family: var(--mono);
+        font-size: 11.5px;
         font-weight: 500;
-        color: var(--violet-pale);
-        background: rgba(139, 92, 246, 0.1);
-        border: 1px solid rgba(139, 92, 246, 0.22);
+        color: var(--violet);
+        background: var(--violet-light);
+        border: 1px solid #d8d0f7;
+        border-radius: 6px;
+        padding: 3px 10px;
+      }
+      .project-visual {
+        background: linear-gradient(
+          135deg,
+          var(--violet-pale) 0%,
+          var(--violet-light) 100%
+        );
+        border-left: 1.5px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 2rem;
+      }
+      .mock-window {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        width: 100%;
+        max-width: 220px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(109, 63, 200, 0.1);
+      }
+      .mock-titlebar {
+        background: var(--bg2);
+        padding: 8px 12px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .mock-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .mock-row {
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .mock-line {
+        height: 8px;
+        border-radius: 4px;
+        background: var(--border);
+      }
+      .mock-line.accent {
+        background: #d8d0f7;
+        width: 60%;
+      }
+      .mock-line.short {
+        width: 40%;
+      }
+      .mock-kanban {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+        padding: 10px 12px;
+      }
+      .mock-col {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .mock-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 5px 6px;
+      }
+      .mock-card-line {
+        height: 5px;
+        border-radius: 3px;
+        background: var(--border);
+        margin-bottom: 3px;
+      }
+      .mock-card-line.v {
+        background: #c4b5f7;
       }
 
       /* ── GAMING ── */
-      .gaming {
-        margin-bottom: 5rem;
-      }
-      .gaming-subtitle {
-        color: var(--dim);
-        font-size: 15px;
-        margin-bottom: 1.5rem;
+      #gaming {
+        background: var(--white);
+        border-top: 1px solid var(--border);
       }
       .gaming-card {
         position: relative;
-        border-radius: 24px;
+        border-radius: 16px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        height: 360px;
+        border: 1.5px solid var(--border);
+        height: 320px;
       }
       .gaming-card img {
         position: absolute;
@@ -400,411 +531,631 @@
         inset: 0;
         background: linear-gradient(
           to top,
-          rgba(8, 8, 15, 0.92) 0%,
-          rgba(8, 8, 15, 0.3) 50%,
+          rgba(14, 10, 30, 0.88) 0%,
+          rgba(14, 10, 30, 0.2) 55%,
           transparent 100%
         );
       }
       .gaming-info {
         position: absolute;
         bottom: 0;
-        padding: 2rem;
+        padding: 1.8rem 2rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        width: 100%;
       }
       .gaming-info h3 {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
         font-weight: 700;
-        color: #e2d9f3;
-        margin-bottom: 0.5rem;
+        color: #fff;
+        margin-bottom: 4px;
       }
       .gaming-info p {
-        color: var(--muted);
-        font-size: 15px;
-        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 13.5px;
       }
       .slide-dots {
         display: flex;
-        gap: 8px;
+        gap: 6px;
+        align-items: center;
       }
       .dot {
-        height: 6px;
+        height: 5px;
+        width: 5px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.2);
-        transition: all 0.4s ease;
-        width: 6px;
+        background: rgba(255, 255, 255, 0.3);
+        transition: all 0.35s ease;
       }
       .dot.active {
-        background: var(--violet-light);
-        width: 24px;
+        background: #fff;
+        width: 20px;
       }
 
       /* ── KONTAKT ── */
-      .kontakt {
-        margin-bottom: 3rem;
+      #kontakt {
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+      }
+      .kontakt-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+      .kontakt-text h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.8rem;
+      }
+      .kontakt-text p {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.75;
+        margin-bottom: 1.5rem;
       }
       .kontakt-links {
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
+        flex-direction: column;
+        gap: 10px;
       }
       .kontakt-link {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 22px;
-        border-radius: 12px;
-        border: 1px solid rgba(139, 92, 246, 0.25);
-        background: rgba(139, 92, 246, 0.06);
-        color: var(--violet-light);
+        gap: 12px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        border: 1.5px solid var(--border);
+        background: var(--white);
+        color: var(--text);
+        text-decoration: none;
         font-size: 14px;
         font-weight: 500;
-        text-decoration: none;
         transition:
-          background 0.2s,
-          color 0.2s;
-        font-family: "DM Sans", sans-serif;
+          border-color 0.2s,
+          background 0.2s;
       }
       .kontakt-link:hover {
-        background: rgba(139, 92, 246, 0.16);
-        color: var(--violet-pale);
+        border-color: var(--violet-mid);
+        background: var(--violet-pale);
       }
-      .kontakt-link svg {
+      .kontakt-link-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--violet-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
+        color: var(--violet);
+      }
+      .kontakt-link-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .kontakt-link-label {
+        font-size: 12px;
+        color: var(--dim);
+        font-weight: 400;
+      }
+      .kontakt-link-val {
+        font-size: 14px;
+        color: var(--text);
+        font-weight: 500;
       }
 
       /* ── FOOTER ── */
       footer {
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 1.5rem 0 0.5rem;
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        padding: 1.5rem 0;
         text-align: center;
-        color: #334155;
+      }
+      footer p {
         font-size: 13px;
-        font-family: "DM Mono", monospace;
+        color: var(--dim);
+        font-family: var(--mono);
       }
 
       /* ── FADE IN ── */
-      .fade-in {
+      .fade {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(20px);
         transition:
-          opacity 0.7s ease,
-          transform 0.7s ease;
+          opacity 0.6s ease,
+          transform 0.6s ease;
       }
-      .fade-in.visible {
+      .fade.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
       }
 
-      @media (max-width: 600px) {
-        .wrapper {
-          padding: 3rem 1.25rem 2rem;
+      @media (max-width: 720px) {
+        .hero-grid,
+        .about-grid,
+        .project-card,
+        .kontakt-grid {
+          grid-template-columns: 1fr;
         }
-        .card {
-          padding: 1.5rem;
+        .hero-badge-col {
+          align-items: flex-start;
+          flex-direction: row;
         }
-        .project-card {
-          padding: 1.5rem;
+        .project-visual {
+          display: none;
+        }
+        .nav-links {
+          display: none;
         }
       }
     </style>
   </head>
   <body>
-    <canvas id="bg-canvas"></canvas>
-    <div class="glow-1"></div>
-    <div class="glow-2"></div>
-
-    <div class="wrapper">
-      <!-- HERO -->
-      <header class="hero fade-in">
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          Bewerbungsprofil · 2025
-        </div>
-        <h1>
-          <span class="name-white">Jessica</span>
-          <span class="name-grad">Frigerio</span>
-        </h1>
-        <p class="hero-sub">
-          Junior Software Developer EFZ — fokussiert auf moderne Webentwicklung
-          &amp; Qualitätssicherung.
-        </p>
-        <div class="hero-btns">
-          <a
-            href="Lebenslauf_Jessica_Frigerio.pdf"
-            target="_blank"
-            class="btn-primary"
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">jf.dev</a>
+        <ul class="nav-links">
+          <li><a href="#about">Über mich</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projekt">Projekt</a></li>
+          <li><a href="#gaming">Beyond Coding</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <a
+          href="Lebenslauf_Jessica_Frigerio.pdf"
+          target="_blank"
+          class="btn-primary"
+          style="padding: 8px 18px; font-size: 13px"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-              />
-            </svg>
-            Lebenslauf öffnen
-          </a>
-          <a href="mailto:jessica.frigerio@hotmail.ch" class="btn-outline"
-            >Kontakt aufnehmen</a
-          >
-        </div>
-      </header>
+            <path
+              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+            />
+          </svg>
+          CV
+        </a>
+      </div>
+    </nav>
 
-      <!-- ÜBER MICH -->
-      <section class="about fade-in">
-        <div class="label">
-          <div class="label-line"></div>
-          <span>Über mich</span>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="fade">
+            <div class="hero-tag">
+              <div class="hero-tag-dot"></div>
+              Offen für neue Stellen
+            </div>
+            <h1>Jessica<br /><span>Frigerio</span></h1>
+            <p class="hero-sub">
+              Junior Software Developer EFZ — spezialisiert auf moderne
+              Webentwicklung, Debugging und Qualitätssicherung.
+            </p>
+            <div class="hero-btns">
+              <a href="#kontakt" class="btn-primary">Kontakt aufnehmen</a>
+              <a href="#projekt" class="btn-ghost">Projekt ansehen</a>
+            </div>
+          </div>
+          <div class="hero-badge-col fade">
+            <div class="stat-box">
+              <div class="stat-num">EFZ</div>
+              <div class="stat-label">Abschluss 2025</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">8+</div>
+              <div class="stat-label">Technologien</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">QA</div>
+              <div class="stat-label">Fokus Testing</div>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <p>
-            Hallo, ich bin Jessy. Ich habe meine Ausbildung als
-            <em>Applikationsentwicklerin EFZ</em> abgeschlossen und interessiere
-            mich besonders für moderne Webentwicklung, strukturierte
-            Problemlösung und benutzerfreundliche Anwendungen. Während meiner
-            Projekte habe ich gemerkt, dass mich vor allem
-            <em>Debugging, Fehleranalyse und Qualitätssicherung</em> begeistern
-            — deshalb möchte ich mich künftig stärker im Bereich Software
-            Testing weiterentwickeln. Privat schätze ich Natur, Gaming und
-            kreative Projekte.
-          </p>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- TECH STACK -->
-      <section class="skills fade-in">
-        <div class="label">
-          <div class="label-line"></div>
-          <span>Tech Stack</span>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header fade">
+          <h2>Über mich</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-text fade">
+            <p>
+              Hallo, ich bin Jessy. Ich habe meine Ausbildung als
+              <em>Applikationsentwicklerin EFZ</em> abgeschlossen und
+              interessiere mich besonders für moderne Webentwicklung und
+              benutzerfreundliche Anwendungen.
+            </p>
+            <p>
+              Während meiner Projekte habe ich gemerkt, dass mich vor allem
+              <em>Debugging, Fehleranalyse und Qualitätssicherung</em>
+              begeistern — deshalb möchte ich mich künftig stärker im Bereich
+              <em>Software Testing</em> weiterentwickeln.
+            </p>
+            <p>Privat schätze ich Natur, Gaming und kreative Projekte.</p>
+          </div>
+          <div class="fade">
+            <ul class="info-list">
+              <li>
+                <span class="info-key">Ausbildung</span
+                ><span class="info-val">Applikationsentwicklerin EFZ</span>
+              </li>
+              <li>
+                <span class="info-key">Fokus</span
+                ><span class="info-val">Webentwicklung & QA / Testing</span>
+              </li>
+              <li>
+                <span class="info-key">Stack</span
+                ><span class="info-val"
+                  >React, Next.js, TypeScript, PostgreSQL</span
+                >
+              </li>
+              <li>
+                <span class="info-key">Status</span
+                ><span class="info-val">Aktiv auf Stellensuche</span>
+              </li>
+              <li>
+                <span class="info-key">Sprachen</span
+                ><span class="info-val"
+                  >Deutsch (Muttersprache), Italienisch</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header fade">
+          <h2>Tech Stack</h2>
+          <div class="section-line"></div>
         </div>
         <div class="skills-grid">
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
               alt="React"
             />
             <span>React</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
               alt="Next.js"
-              style="filter: invert(1)"
+              style="filter: invert(1) hue-rotate(220deg) saturate(0.5)"
             />
             <span>Next.js</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
               alt="TypeScript"
             />
             <span>TypeScript</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
               alt="Tailwind"
             />
             <span>Tailwind</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
               alt="PostgreSQL"
             />
             <span>PostgreSQL</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
               alt="Prisma"
-              style="filter: invert(1)"
+              style="
+                filter: invert(0.3) sepia(1) saturate(3) hue-rotate(220deg);
+              "
             />
             <span>Prisma</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
               alt="Git"
             />
             <span>Git</span>
           </div>
-          <div class="skill-card">
+          <div class="skill-card fade">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
               alt="AWS"
-              style="filter: invert(0.7) sepia(1) saturate(2) hue-rotate(10deg)"
+              style="
+                filter: invert(0.3) sepia(1) saturate(2) hue-rotate(220deg);
+              "
             />
             <span>AWS</span>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- PROJEKT -->
-      <section class="project fade-in">
-        <div class="label">
-          <div class="label-line"></div>
-          <span>Projekt</span>
+    <!-- PROJEKT -->
+    <section id="projekt">
+      <div class="container">
+        <div class="section-header fade">
+          <h2>Projekt</h2>
+          <div class="section-line"></div>
         </div>
-        <div class="project-card">
-          <span class="project-tag">IPA Projekt</span>
-          <h3>Kleinsteuber<br />Projektmanagement-Tool</h3>
-          <p>
-            Webbasierte Projektmanagement-App mit Kanban-Board,
-            Benutzerverwaltung, Dashboard, Timeline und PostgreSQL-Datenbank.
-          </p>
-          <div class="tech-tags">
-            <span class="tech-tag">Next.js</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Prisma</span>
-            <span class="tech-tag">AWS</span>
+        <div class="project-card fade">
+          <div class="project-body">
+            <p class="project-eyebrow">IPA · Abschlussprojekt 2025</p>
+            <h3>Kleinsteuber<br />Projektmanagement-Tool</h3>
+            <p>
+              Webbasierte Applikation zur Projektverwaltung mit vollständigem
+              Kanban-Board, Benutzerverwaltung, interaktivem Dashboard und
+              Timeline-Ansicht.
+            </p>
+            <ul class="project-features">
+              <li>Kanban-Board mit Drag & Drop</li>
+              <li>Benutzerverwaltung & Rollen</li>
+              <li>Dashboard mit Echtzeit-Statistiken</li>
+              <li>PostgreSQL Datenbank via Prisma ORM</li>
+              <li>Deployment auf AWS</li>
+            </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Prisma</span>
+              <span class="tech-tag">AWS</span>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <!-- GAMING -->
-      <section class="gaming fade-in">
-        <div class="label">
-          <div class="label-line"></div>
-          <span>Beyond Coding</span>
-        </div>
-        <p class="gaming-subtitle">
-          Gaming begeistert mich nicht nur privat, sondern auch wegen der
-          Technik, Kreativität und Problemlösungslogik dahinter.
-        </p>
-        <div class="gaming-card">
-          <img src="Diablo.jpg" alt="Gaming" class="active" id="slide-0" />
-          <img src="Rdr.jpg" alt="Gaming" id="slide-1" />
-          <img src="BG3.jpg" alt="Gaming" id="slide-2" />
-          <img src="Repo.jpg" alt="Gaming" id="slide-3" />
-          <div class="gaming-overlay"></div>
-          <div class="gaming-info">
-            <h3>Gaming &amp; Technologie</h3>
-            <div class="slide-dots">
-              <div class="dot active" id="dot-0"></div>
-              <div class="dot" id="dot-1"></div>
-              <div class="dot" id="dot-2"></div>
-              <div class="dot" id="dot-3"></div>
+          <div class="project-visual">
+            <div class="mock-window">
+              <div class="mock-titlebar">
+                <div class="mock-dot" style="background: #ff6058"></div>
+                <div class="mock-dot" style="background: #ffbc2e"></div>
+                <div class="mock-dot" style="background: #28c840"></div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-line accent"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line short"></div>
+              </div>
+              <div class="mock-kanban">
+                <div class="mock-col">
+                  <div class="mock-card">
+                    <div class="mock-card-line v"></div>
+                    <div class="mock-card-line"></div>
+                  </div>
+                  <div class="mock-card">
+                    <div class="mock-card-line v"></div>
+                    <div class="mock-card-line"></div>
+                  </div>
+                </div>
+                <div class="mock-col">
+                  <div class="mock-card">
+                    <div class="mock-card-line v"></div>
+                    <div class="mock-card-line"></div>
+                  </div>
+                </div>
+                <div class="mock-col">
+                  <div class="mock-card">
+                    <div class="mock-card-line v"></div>
+                    <div class="mock-card-line"></div>
+                  </div>
+                  <div class="mock-card">
+                    <div class="mock-card-line v"></div>
+                    <div class="mock-card-line"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- KONTAKT -->
-      <section class="kontakt fade-in">
-        <div class="label">
-          <div class="label-line"></div>
-          <span>Kontakt</span>
+    <!-- GAMING -->
+    <section id="gaming">
+      <div class="container">
+        <div class="section-header fade">
+          <h2>Beyond Coding</h2>
+          <div class="section-line"></div>
         </div>
-        <div class="kontakt-links">
-          <a href="mailto:jessica.frigerio@hotmail.ch" class="kontakt-link">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        <div class="gaming-card fade">
+          <img src="Diablo.jpg" alt="Gaming" class="active" />
+          <img src="Rdr.jpg" alt="Gaming" />
+          <img src="BG3.jpg" alt="Gaming" />
+          <img src="Repo.jpg" alt="Gaming" />
+          <div class="gaming-overlay"></div>
+          <div class="gaming-info">
+            <div>
+              <h3>Gaming &amp; Technologie</h3>
+              <p>Fasziniert von Technik, Kreativität und Problemlösungslogik</p>
+            </div>
+            <div class="slide-dots">
+              <div class="dot active"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+      <div class="container">
+        <div class="section-header fade">
+          <h2>Kontakt</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="kontakt-grid">
+          <div class="fade">
+            <h3>Lass uns reden.</h3>
+            <p>
+              Ich bin aktuell auf der Suche nach einer Festanstellung als Junior
+              Developer oder im Bereich Software Testing & QA. Meld dich gerne!
+            </p>
+            <a
+              href="Lebenslauf_Jessica_Frigerio.pdf"
+              target="_blank"
+              class="btn-primary"
+              style="display: inline-flex"
             >
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-            E-Mail
-          </a>
-          <a
-            href="https://github.com/frijess98"
-            target="_blank"
-            class="kontakt-link"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              />
-            </svg>
-            GitHub
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="kontakt-link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-              />
-            </svg>
-            LinkedIn
-          </a>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+                />
+              </svg>
+              Lebenslauf herunterladen
+            </a>
+          </div>
+          <div class="kontakt-links fade">
+            <a href="mailto:jessica.frigerio@hotmail.ch" class="kontakt-link">
+              <div class="kontakt-link-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </div>
+              <div class="kontakt-link-info">
+                <span class="kontakt-link-label">E-Mail</span>
+                <span class="kontakt-link-val"
+                  >jessica.frigerio@hotmail.ch</span
+                >
+              </div>
+            </a>
+            <a
+              href="https://github.com/frijess98"
+              target="_blank"
+              class="kontakt-link"
+            >
+              <div class="kontakt-link-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="kontakt-link-info">
+                <span class="kontakt-link-label">GitHub</span>
+                <span class="kontakt-link-val">github.com/frijess98</span>
+              </div>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="kontakt-link">
+              <div class="kontakt-link-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </div>
+              <div class="kontakt-link-info">
+                <span class="kontakt-link-label">LinkedIn</span>
+                <span class="kontakt-link-val">Profil ansehen</span>
+              </div>
+            </a>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <footer>© 2025 Jessica Frigerio</footer>
-    </div>
+    <footer>
+      <div class="container">
+        <p>© 2025 Jessica Frigerio — Junior Software Developer EFZ</p>
+      </div>
+    </footer>
 
     <script>
-      // ── Dot grid animation ──
-      const canvas = document.getElementById("bg-canvas");
-      const ctx = canvas.getContext("2d");
-      let t = 0;
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener("resize", resize);
-
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const cols = Math.ceil(canvas.width / 60);
-        const rows = Math.ceil(canvas.height / 60);
-        for (let x = 0; x <= cols; x++) {
-          for (let y = 0; y <= rows; y++) {
-            const p = Math.sin(t * 0.5 + x * 0.4 + y * 0.3) * 0.5 + 0.5;
-            ctx.beginPath();
-            ctx.arc(x * 60, y * 60, 1.3, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(139,92,246,${p * 0.18})`;
-            ctx.fill();
-          }
-        }
-        t += 0.018;
-        requestAnimationFrame(draw);
-      }
-      draw();
-
-      // ── Slideshow ──
+      // Slideshow
       const slides = document.querySelectorAll(".gaming-card img");
       const dots = document.querySelectorAll(".dot");
-      let current = 0;
-
+      let cur = 0;
       setInterval(() => {
-        slides[current].classList.remove("active");
-        dots[current].classList.remove("active");
-        current = (current + 1) % slides.length;
-        slides[current].classList.add("active");
-        dots[current].classList.add("active");
-      }, 3000);
+        slides[cur].classList.remove("active");
+        dots[cur].classList.remove("active");
+        cur = (cur + 1) % slides.length;
+        slides[cur].classList.add("active");
+        dots[cur].classList.add("active");
+      }, 3200);
 
-      // ── Scroll fade-in ──
-      const observer = new IntersectionObserver(
+      // Fade in on scroll
+      const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
               e.target.classList.add("visible");
-              observer.unobserve(e.target);
+              obs.unobserve(e.target);
             }
           });
         },
-        { threshold: 0.1 },
+        { threshold: 0.08 },
       );
+      document.querySelectorAll(".fade").forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.04}s`;
+        obs.observe(el);
+      });
 
-      document.querySelectorAll(".fade-in").forEach((el, i) => {
-        el.style.transitionDelay = `${i * 0.08}s`;
-        observer.observe(el);
+      // Active nav highlight
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((s) => {
+          if (window.scrollY >= s.offsetTop - 80) current = s.id;
+        });
+        navLinks.forEach((a) => {
+          a.style.color =
+            a.getAttribute("href") === "#" + current ? "var(--violet)" : "";
+        });
       });
     </script>
   </body>
